@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>樾樾的初升高备考文档库</title>
+    <style>
+        /* 基础样式 */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Microsoft YaHei', sans-serif; }
+        body { background-color: #f5f7fa; color: #333; line-height: 1.6; padding: 20px; max-width: 1200px; margin: 0 auto; }
+        
+        /* 顶部LOGO区域 */
+        header { text-align: center; margin-bottom: 40px; }
+        #logo { 
+            width: 100%; 
+            height: 20vh; /* 约为页面高度的五分之一 */
+            background-color: #4a6fa5; /* 临时蓝色背景，稍后替换为您的图片 */
+            background-image: url('assets/images/logo.png'); /* 稍后替换路径 */
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+        h1 { color: #2c3e50; margin-top: 10px; }
+
+        /* 学科导航按钮区域 */
+        main { text-align: center; }
+        .subject-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 25px; 
+            margin-top: 30px;
+        }
+        .subject-btn {
+            background-color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 30px 20px;
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+        .subject-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        /* 为不同学科设置不同颜色 */
+        #chinese { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        #math { background: linear-gradient(135deg, #3498db, #2980b9); }
+        #english { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+        #physics { background: linear-gradient(135deg, #1abc9c, #16a085); }
+        #chemistry { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        #history { background: linear-gradient(135deg, #34495e, #2c3e50); }
+        #morality { background: linear-gradient(135deg, #e84393, #fd79a8); }
+
+        /* 页脚 */
+        footer { 
+            margin-top: 50px; 
+            text-align: center; 
+            color: #7f8c8d; 
+            font-size: 14px; 
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .subject-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .subject-btn { padding: 25px 15px; font-size: 18px; }
+            h1 { font-size: 24px; }
+        }
+        @media (max-width: 480px) {
+            .subject-grid { grid-template-columns: 1fr; }
+            body { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <!-- LOGO图片将在这里显示 -->
+            当前是LOGO区域
+        </div>
+        <h1>樾樾的初升高备考文档库</h1>
+    </header>
+
+    <main>
+        <p style="font-size: 18px; color: #555; margin-bottom: 20px;">请选择学科查看备考资料：</p>
+        <div class="subject-grid">
+            <!-- 7个学科按钮，链接到对应的HTML页面 -->
+            <a href="subjects/chinese.html" class="subject-btn" id="chinese">语 文</a>
+            <a href="subjects/math.html" class="subject-btn" id="math">数 学</a>
+            <a href="subjects/english.html" class="subject-btn" id="english">英 语</a>
+            <a href="subjects/physics.html" class="subject-btn" id="physics">物 理</a>
+            <a href="subjects/chemistry.html" class="subject-btn" id="chemistry">化 学</a>
+            <a href="subjects/history.html" class="subject-btn" id="history">历 史</a>
+            <a href="subjects/morality.html" class="subject-btn" id="morality">道 法</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2023 樾樾的初升高备考文档库 | 基于 GitHub Pages 构建 | 最后更新日期：<span id="current-date"></span></p>
+    </footer>
+
+    <script>
+        // 更新页脚日期
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('zh-CN');
+        
+        // 简单检查LOGO图片是否加载失败
+        window.addEventListener('load', function() {
+            var logoDiv = document.getElementById('logo');
+            var logoImg = new Image();
+            logoImg.onload = function() {
+                console.log('LOGO图片加载成功');
+            };
+            logoImg.onerror = function() {
+                logoDiv.innerHTML = 'LOGO图片未上传，请将logo.png放入assets/images/文件夹';
+                logoDiv.style.color = '#e74c3c';
+                logoDiv.style.fontSize = '18px';
+            };
+            logoImg.src = 'assets/images/logo.png';
+        });
+    </script>
+</body>
+</html>
