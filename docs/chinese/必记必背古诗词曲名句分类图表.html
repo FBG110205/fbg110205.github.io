@@ -1,0 +1,2270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>必记必背-古诗词曲名句分类图表</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #3498db;
+        }
+        h1 .subtitle {
+            display: block;
+            font-size: 0.6em;
+            color: #7f8c8d;
+            margin-top: 10px;
+            font-weight: normal;
+        }
+        .category-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border-left: 6px solid;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .category-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+        .category-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            padding-bottom: 10px;
+            border-bottom: 2px solid;
+        }
+        .table-container {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid #e1e8ed;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+        th {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            font-weight: bold;
+            padding: 18px 20px;
+            text-align: left;
+            border-bottom: 2px solid;
+            position: sticky;
+            top: 0;
+        }
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #eef2f7;
+            vertical-align: top;
+        }
+        tr:nth-child(even) {
+            background-color: #fafcff;
+        }
+        tr:hover {
+            background-color: #f0f7ff;
+        }
+        .num {
+            color: #fff;
+            font-weight: bold;
+            width: 50px;
+            text-align: center;
+            border-radius: 20px;
+            padding: 6px 0;
+            display: inline-block;
+            font-size: 0.9em;
+        }
+        .poem-title {
+            color: #2980b9;
+            font-weight: bold;
+            font-size: 1.05em;
+        }
+        .author {
+            color: #27ae60;
+            font-style: italic;
+        }
+        .question {
+            color: #2c3e50;
+            line-height: 1.6;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .question b {
+            color: #d35400;
+            font-weight: 700;
+        }
+        .answer {
+            color: #2c3e50;
+            line-height: 1.7;
+            background-color: #fff9c4;
+            padding: 12px 15px;
+            border-radius: 6px 6px 0 0;
+            border-left: 4px solid #f39c12;
+            font-weight: bold;
+            border-bottom: none;
+        }
+        .explanation {
+            color: #2c3e50;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            padding: 10px 15px 12px 15px;
+            border-radius: 0 0 6px 6px;
+            font-size: 0.95em;
+            color: #5d6d7e;
+            border-left: 4px solid #bdc3c7;
+            border-top: 1px dashed #ddd;
+        }
+        .explanation::before {
+            content: "📝 ";
+            margin-right: 5px;
+        }
+        .content-cell {
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+        
+        /* 不同分类的颜色 */
+        .category-nature { border-left-color: #27ae60; }
+        .category-nature h2 { border-bottom-color: #27ae60; color: #27ae60; }
+        .category-nature th { border-bottom-color: #27ae60; }
+        .category-nature .num { background-color: #27ae60; }
+        
+        .category-patriotism { border-left-color: #e74c3c; }
+        .category-patriotism h2 { border-bottom-color: #e74c3c; color: #e74c3c; }
+        .category-patriotism th { border-bottom-color: #e74c3c; }
+        .category-patriotism .num { background-color: #e74c3c; }
+        
+        .category-homesick { border-left-color: #3498db; }
+        .category-homesick h2 { border-bottom-color: #3498db; color: #3498db; }
+        .category-homesick th { border-bottom-color: #3498db; }
+        .category-homesick .num { background-color: #3498db; }
+        
+        .category-philosophy { border-left-color: #9b59b6; }
+        .category-philosophy h2 { border-bottom-color: #9b59b6; color: #9b59b6; }
+        .category-philosophy th { border-bottom-color: #9b59b6; }
+        .category-philosophy .num { background-color: #9b59b6; }
+        
+        .category-border { border-left-color: #f39c12; }
+        .category-border h2 { border-bottom-color: #f39c12; color: #f39c12; }
+        .category-border th { border-bottom-color: #f39c12; }
+        .category-border .num { background-color: #f39c12; }
+        
+        .category-friendship { border-left-color: #1abc9c; }
+        .category-friendship h2 { border-bottom-color: #1abc9c; color: #1abc9c; }
+        .category-friendship th { border-bottom-color: #1abc9c; }
+        .category-friendship .num { background-color: #1abc9c; }
+        
+        .category-love { border-left-color: #e84393; }
+        .category-love h2 { border-bottom-color: #e84393; color: #e84393; }
+        .category-love th { border-bottom-color: #e84393; }
+        .category-love .num { background-color: #e84393; }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #7f8c8d;
+            font-size: 0.95em;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .stats {
+            text-align: center;
+            margin: 20px 0;
+            color: #7f8c8d;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>必记必背-古诗词曲名句分类图表<br><span class="subtitle">按主题分类 · 带注释解释 · 共120条核心名句</span></h1>
+        
+        <div class="stats">
+            共7个主题分类 | 自然景物(22条) | 家国情怀(16条) | 思乡怀人(15条) | 人生哲理(26条) | 边塞战争(11条) | 友情送别(11条) | 爱情闺怨(6条)
+        </div>
+
+        <!-- 1. 自然景物 -->
+        <div class="category-section category-nature">
+            <h2>🌿 一、自然景物（山水、四季、草木等）</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">1</span></td>
+                            <td><span class="poem-title">《观沧海》</span></td>
+                            <td><span class="author">曹操</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《观沧海》中最能表达作者<b>博大胸襟、远大抱负</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    日月之行，若出其中；星汉灿烂，若出其里。
+                                </div>
+                                <div class="explanation">
+                                    解释：太阳和月亮的运行，好像出自大海之中；灿烂的银河，好像也出自大海里面。诗人以大海的广阔胸怀来象征自己的政治抱负。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">2</span></td>
+                            <td><span class="poem-title">《观沧海》</span></td>
+                            <td><span class="author">曹操</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《观沧海》一诗中，描写<b>草木景色</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    树木丛生，百草丰茂。
+                                </div>
+                                <div class="explanation">
+                                    解释：树木郁郁葱葱地生长，各种野草茂盛繁密。描绘了秋天海岛生机勃勃的景象。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">3</span></td>
+                            <td><span class="poem-title">《观沧海》</span></td>
+                            <td><span class="author">曹操</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《观沧海》一诗中写<b>大海水波动荡，山岛高耸突兀</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    水何澹澹，山岛竦峙。
+                                </div>
+                                <div class="explanation">
+                                    解释：海水多么宽阔浩荡，海中山岛高高地挺立着。写出了大海的雄浑气势。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">4</span></td>
+                            <td><span class="poem-title">《次北固山下》</span></td>
+                            <td><span class="author">王湾</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    王湾在《次北固山下》一诗中描绘<b>涨潮时水面宽阔，帆船顺风而行</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    潮平两岸阔，风正一帆悬。
+                                </div>
+                                <div class="explanation">
+                                    解释：潮水上涨，两岸之间水面宽阔；顺风行船，船帆高高悬挂。描绘了长江下游开阔壮丽的景象。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">5</span></td>
+                            <td><span class="poem-title">《峨眉山月歌》</span></td>
+                            <td><span class="author">李白</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    李白《峨眉山月歌》中表现<b>月光柔柔，波光粼粼</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    峨眉山月半轮秋，影入平羌江水流。
+                                </div>
+                                <div class="explanation">
+                                    解释：峨眉山上挂着半轮秋月，月影倒映在平羌江中，随江水流淌。写出了月映江中的宁静美景。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">6</span></td>
+                            <td><span class="poem-title">《竹里馆》</span></td>
+                            <td><span class="author">王维</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《竹里馆》中<b>用拟人化的手法</b>，显示出诗人新颖而独到的想象力，表达自己僻居深林之中，也并不为此感到孤独的心情的是：
+                                </div>
+                                <div class="answer">
+                                    深林人不知，明月来相照。
+                                </div>
+                                <div class="explanation">
+                                    解释：在深密的竹林里没有人知道我在这里，只有明月殷勤地来相照。将明月拟人化，表现诗人的闲适自得。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">7</span></td>
+                            <td><span class="poem-title">《望岳》</span></td>
+                            <td><span class="author">杜甫</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    杜甫在《望岳》中，<b>借齐鲁大地烘托泰山拔地而起，参天耸立形象</b>的语句是：
+                                </div>
+                                <div class="answer">
+                                    岱宗夫如何？齐鲁青未了。
+                                </div>
+                                <div class="explanation">
+                                    解释：泰山究竟怎么样？在齐鲁大地上，那青翠的山色没有尽头。以齐鲁两地烘托泰山的高大。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">8</span></td>
+                            <td><span class="poem-title">《望岳》</span></td>
+                            <td><span class="author">杜甫</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    杜甫在《望岳》中，<b>虚实结合</b>，描写泰山<b>神奇秀丽，巍峨高大</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    造化钟神秀，阴阳割昏晓。
+                                </div>
+                                <div class="explanation">
+                                    解释：大自然将神奇秀丽都集中于泰山，山南山北将晨昏截然分开。前句虚写泰山神秀，后句实写泰山高大。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">9</span></td>
+                            <td><span class="poem-title">《望岳》</span></td>
+                            <td><span class="author">杜甫</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    杜甫在《望岳》中表现<b>泰山高峻，幽深</b>的诗句：
+                                </div>
+                                <div class="answer">
+                                    荡胸生层云，决眦入归鸟。
+                                </div>
+                                <div class="explanation">
+                                    解释：层云升起使我心胸激荡，睁大眼睛远望归鸟入山。通过云层和飞鸟表现泰山的高峻和幽深。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">10</span></td>
+                            <td><span class="poem-title">《约客》</span></td>
+                            <td><span class="author">赵师秀</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    赵师秀《约客》一诗中，<b>描写江南梅雨时节清新幽静可爱景色</b>，交待深夜候客不至的原因，衬托诗人孤寂，无聊心情的两句是：
+                                </div>
+                                <div class="answer">
+                                    黄梅时节家家雨，青草池塘处处蛙。
+                                </div>
+                                <div class="explanation">
+                                    解释：黄梅时节家家户户都被烟雨笼罩，长满青草的池塘里处处是青蛙的叫声。描绘了江南梅雨季节的特有景色。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">11</span></td>
+                            <td><span class="poem-title">《野望》</span></td>
+                            <td><span class="author">王绩</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《野望》中运用<b>对偶手法描写傍晚时分，遥望山野，满目浓浓秋意</b>的写景句：
+                                </div>
+                                <div class="answer">
+                                    树树皆秋色，山山唯落晖。
+                                </div>
+                                <div class="explanation">
+                                    解释：每一棵树都染上秋天的色彩，每一座山都洒满落日的余晖。对仗工整，描绘了山野秋景。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">12</span></td>
+                            <td><span class="poem-title">《黄鹤楼》</span></td>
+                            <td><span class="author">崔颢</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    崔颢用<b>对偶描写在黄鹤楼上所见之景</b>的句子：
+                                </div>
+                                <div class="answer">
+                                    晴川历历汉阳树，芳草萋萋鹦鹉洲。
+                                </div>
+                                <div class="explanation">
+                                    解释：晴朗的汉阳平原上树木清晰可见，鹦鹉洲上芳草茂盛。对仗工整，描绘了登黄鹤楼所见美景。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">13</span></td>
+                            <td><span class="poem-title">《渡荆门送别》</span></td>
+                            <td><span class="author">李白</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    李白在《渡荆门送别》一诗中，<b>化静为动</b>，表现<b>雄浑开阔的意境</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    山随平野尽，江入大荒流。
+                                </div>
+                                <div class="explanation">
+                                    解释：群山随着平原的出现而逐渐消失，长江在广阔的原野上奔流。静态的山化为动态，写出了江山的壮阔。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">14</span></td>
+                            <td><span class="poem-title">《渡荆门送别》</span></td>
+                            <td><span class="author">李白</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    李白在《渡荆门送别》一诗中，表达了<b>奇特大胆的想象</b>这一特点的诗句是：
+                                </div>
+                                <div class="answer">
+                                    月下飞天镜，云生结海楼。
+                                </div>
+                                <div class="explanation">
+                                    解释：月亮倒映水中像天上飞下的明镜，云霞变幻结成海市蜃楼般的奇景。运用丰富想象描绘长江夜景。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">15</span></td>
+                            <td><span class="poem-title">《钱塘湖春行》</span></td>
+                            <td><span class="author">白居易</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    白居易在《钱塘湖春行》中描绘<b>春花初绽，春草吐绿</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    乱花渐欲迷人眼，浅草才能没马蹄。
+                                </div>
+                                <div class="explanation">
+                                    解释：杂乱的野花渐渐让人眼花缭乱，浅浅的春草刚刚能够没过马蹄。生动描绘了西湖早春的生机盎然。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">16</span></td>
+                            <td><span class="poem-title">《饮酒》</span></td>
+                            <td><span class="author">陶渊明</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    陶渊明《饮酒》中表现了<b>怡然自得，恬淡闲适，热爱自然，旷达胸襟</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    采菊东篱下，悠然见南山。
+                                </div>
+                                <div class="explanation">
+                                    解释：在东篱下采摘菊花，悠闲自在地抬头看见南山。表现了诗人超脱尘世、悠然自得的心境。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">17</span></td>
+                            <td><span class="poem-title">《如梦令》</span></td>
+                            <td><span class="author">李清照</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《如梦令》中<b>景色迷人，乐不思"宿"</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    常记溪亭日暮，沉醉不知归路。
+                                </div>
+                                <div class="explanation">
+                                    解释：时常记起在溪边亭子游玩到日暮，沉醉美景忘记了回家的路。表现了词人对自然美景的沉醉。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">18</span></td>
+                            <td><span class="poem-title">《如梦令》</span></td>
+                            <td><span class="author">李清照</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    翠绿的荷花和旭日中，嫣红的荷花，给人以凉爽幽静，清香扑鼻的感觉，诗人杨万里赞其是"接天莲叶无穷碧，映日荷花别样红"，而词人李清照却在《如梦令》中嗟叹：
+                                </div>
+                                <div class="answer">
+                                    兴尽晚回舟，误入藕花深处。
+                                </div>
+                                <div class="explanation">
+                                    解释：游兴满足了，天黑往回划船，却误入了荷花深处。以"误入"表现了对荷花美景的惊喜和陶醉。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">19</span></td>
+                            <td><span class="poem-title">《题破山寺后禅院》</span></td>
+                            <td><span class="author">常建</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《题破山寺后禅院》中写出了<b>环境的清幽及人生的启示</b>的两句诗是：
+                                </div>
+                                <div class="answer">
+                                    山光悦鸟性，潭影空人心。
+                                </div>
+                                <div class="explanation">
+                                    解释：山色使鸟儿怡然自得，潭中倒影使人心灵空明。表现了禅院的幽静环境对人心的净化作用。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">20</span></td>
+                            <td><span class="poem-title">《卜算子·黄州定慧院寓居作》</span></td>
+                            <td><span class="author">苏轼</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    "营造了<b>夜深人静、月挂疏桐的孤寂氛围</b>，为'幽人''孤鸿'的出场作铺垫"的句子是：
+                                </div>
+                                <div class="answer">
+                                    缺月挂疏桐，漏断人初静。
+                                </div>
+                                <div class="explanation">
+                                    解释：残月挂在稀疏的梧桐树上，漏壶水尽，夜深人静。营造了一种孤寂冷清的氛围。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">21</span></td>
+                            <td><span class="poem-title">《行香子》</span></td>
+                            <td><span class="author">秦观</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    秦观《行香子》中从<b>色彩的角度描绘春满小园的诱人图画</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    有桃花红，李花白，菜花黄。
+                                </div>
+                                <div class="explanation">
+                                    解释：有粉红的桃花，雪白的李花，金黄的菜花。通过三种颜色的对比，描绘了春天花园的色彩斑斓。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">22</span></td>
+                            <td><span class="poem-title">《行香子》</span></td>
+                            <td><span class="author">秦观</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    秦观《行香子》中<b>通过特写田野一隅，营造一幅莺啼燕舞、蝴蝶采蜜的画图</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    正莺儿啼，燕儿舞，蝶儿忙。
+                                </div>
+                                <div class="explanation">
+                                    解释：正是黄莺啼叫，燕子飞舞，蝴蝶忙碌的时候。通过三种动物的动态描写，表现了春天的生机勃勃。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 2. 家国情怀 -->
+        <div class="category-section category-patriotism">
+            <h2>🇨🇳 二、家国情怀（爱国、忧国、报国等）</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">23</span></td>
+                            <td><span class="poem-title">《十一月四日风雨大作》</span></td>
+                            <td><span class="author">陆游</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    陆游的《十一月四日风雨大作》中<b>直接表达了自己虽然年老体弱，但仍想守卫边疆，报效祖国的心愿</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    僵卧孤村不自哀，尚思为国戍轮台。
+                                </div>
+                                <div class="explanation">
+                                    解释：我僵直地躺在孤寂的乡村里并不为自己悲哀，还想着为国家戍守边疆。表现了诗人至老不衰的爱国热情。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">24</span></td>
+                            <td><span class="poem-title">《十一月四日风雨大作》</span></td>
+                            <td><span class="author">陆游</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《十一月四日风雨大作》中写<b>诗人睡梦中仿佛正在战场上激烈拼杀</b>的句子：
+                                </div>
+                                <div class="answer">
+                                    夜阑卧听风吹雨，铁马冰河入梦来。
+                                </div>
+                                <div class="explanation">
+                                    解释：夜深躺着听风雨声，梦见自己骑着战马跨过冰河奔赴战场。日有所思夜有所梦，表现了诗人杀敌报国的渴望。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">25</span></td>
+                            <td><span class="poem-title">《己亥杂诗》</span></td>
+                            <td><span class="author">龚自珍</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    龚自珍在《己亥杂诗》中<b>形象地表达了自己虽然辞官，但仍会关心国家的前途和命运</b>且代落花立意，倾吐心曲，表现崇高的献身精神的句子是：
+                                </div>
+                                <div class="answer">
+                                    落红不是无情物，化作春泥更护花。
+                                </div>
+                                <div class="explanation">
+                                    解释：落花不是无情的东西，它化作春天的泥土还能培育新一代的鲜花。比喻自己虽辞官仍要为国效力。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">26</span></td>
+                            <td><span class="poem-title">《泊秦淮》</span></td>
+                            <td><span class="author">杜牧</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《泊秦淮》一诗中，诗人<b>借"商女"而批评沉溺于歌舞升平而"不知"国之将亡的统治者</b>的一句诗是：
+                                </div>
+                                <div class="answer">
+                                    商女不知亡国恨，隔江犹唱后庭花。
+                                </div>
+                                <div class="explanation">
+                                    解释：歌女不知道亡国的遗恨，还在对岸唱着《玉树后庭花》。表面批评歌女，实际讽刺醉生梦死的统治者。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">27</span></td>
+                            <td><span class="poem-title">《春望》</span></td>
+                            <td><span class="author">杜甫</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    杜甫在《春望》一诗中<b>悲哀国破家亡，伤感离乱之痛</b>，表现他爱国，念家的美好情操，诗中能够<b>表现他忧愁而日益衰老</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    白头搔更短，浑欲不胜簪。
+                                </div>
+                                <div class="explanation">
+                                    解释：白发越搔越短，简直要插不住簪子了。通过细节描写表现了诗人忧国忧民而日益衰老的形象。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">28</span></td>
+                            <td><span class="poem-title">《相见欢》</span></td>
+                            <td><span class="author">朱敦儒</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    朱敦儒的《相见欢》<b>表现了作者渴望早日恢复中原，还于旧都的强烈愿望</b>，同时也是对朝廷苟安旦夕，不图恢复的愤慨和抗议的诗句是：
+                                </div>
+                                <div class="answer">
+                                    试倩悲风吹泪过扬州。
+                                </div>
+                                <div class="explanation">
+                                    解释：请悲凉的风把我的眼泪吹过扬州去。借北望中原表达对收复失地的渴望和对朝廷的不满。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">29</span></td>
+                            <td><span class="poem-title">《沁园春·雪》</span></td>
+                            <td><span class="author">毛泽东</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《沁园春·雪》中<b>点明全文主题，抒发诗人豪情壮志</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    俱往矣，数风流人物，还看今朝。
+                                </div>
+                                <div class="explanation">
+                                    解释：都已经过去了，要数真正建功立业的英雄人物，还要看今天的人们。表达了无产阶级革命家的豪情壮志。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">30</span></td>
+                            <td><span class="poem-title">《左迁至蓝关示侄孙湘》</span></td>
+                            <td><span class="author">韩愈</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    韩愈的《左迁至蓝关示侄孙湘》中<b>表明其效忠朝廷的态度和决心</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    欲为圣明除弊事，肯将衰朽惜残年。
+                                </div>
+                                <div class="explanation">
+                                    解释：想为圣明的朝廷革除弊政，哪里肯顾惜自己衰朽的残年。表现了诗人忠君爱国、刚正不阿的精神。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">31</span></td>
+                            <td><span class="poem-title">《破阵子·为陈同甫赋壮词以寄之》</span></td>
+                            <td><span class="author">辛弃疾</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《破阵子·为陈同甫赋壮词以寄之》中<b>直接抒发词人收复中原、建功立业的爱国激情和雄心壮志</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    了却君王天下事，赢得生前身后名。
+                                </div>
+                                <div class="explanation">
+                                    解释：完成君王收复中原的大业，赢得自己生前死后的美名。表达了词人渴望建功立业、报效国家的豪情。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">32</span></td>
+                            <td><span class="poem-title">《满江红》</span></td>
+                            <td><span class="author">秋瑾</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    秋瑾的《满江红》中<b>化用陶渊明《饮酒》(其五)和李清照《醉花阴》</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    为篱下黄花开遍，秋容如拭。
+                                </div>
+                                <div class="explanation">
+                                    解释：篱笆下的菊花已经开遍，秋天的容颜好像被擦拭过一样明净。借菊花高洁品格自喻，表达革命者的高尚情操。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">33</span></td>
+                            <td><span class="poem-title">《过零丁洋》</span></td>
+                            <td><span class="author">文天祥</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    文天祥在《过零丁洋》一诗中<b>生动形象地写出了国势危急和个人命运坎坷</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    山河破碎风飘絮，身世浮沉雨打萍。
+                                </div>
+                                <div class="explanation">
+                                    解释：国家山河破碎像被风吹散的柳絮，自己一生动荡像被雨打的浮萍。比喻贴切，表现国家危亡和个人不幸。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">34</span></td>
+                            <td><span class="poem-title">《过零丁洋》</span></td>
+                            <td><span class="author">文天祥</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    "青山处处埋忠骨，何必马革裹尸还"这两句诗与我们学习过的文天祥的<b>表达以死明志的决心</b>的两句诗一样：
+                                </div>
+                                <div class="answer">
+                                    人生自古谁无死？留取丹心照汗青。
+                                </div>
+                                <div class="explanation">
+                                    解释：自古以来谁人不死？要留下一片赤诚的心光照史册。表现了诗人视死如归、为国捐躯的崇高精神。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">35</span></td>
+                            <td><span class="poem-title">《山坡羊·潼关怀古》</span></td>
+                            <td><span class="author">张养浩</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《山坡羊·潼关怀古》曲中<b>对在离乱中遭受苦难的人民深表同情并点明该曲主旨</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    兴，百姓苦；亡，百姓苦。
+                                </div>
+                                <div class="explanation">
+                                    解释：王朝兴起，百姓受苦；王朝灭亡，百姓还是受苦。深刻揭示了封建王朝更迭中百姓始终受苦的历史规律。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">36</span></td>
+                            <td><span class="poem-title">《山坡羊·骊山怀古》</span></td>
+                            <td><span class="author">张养浩</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《山坡羊·骊山怀古》曲中<b>表明作者对历史兴亡的大彻大悟，对王朝争权夺位者们的否定</b>（表现诗人感时伤怀的情绪，慨叹历史更迭的无情和必然）的句子是：
+                                </div>
+                                <div class="answer">
+                                    赢，都变做了土；输，都变做了土。
+                                </div>
+                                <div class="explanation">
+                                    解释：赢了的，都变成了土；输了的，也都变成了土。表达了对历史兴亡的透彻认识，所有争权夺利最终都是空。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">37</span></td>
+                            <td><span class="poem-title">《朝天子·咏喇叭》</span></td>
+                            <td><span class="author">王磐</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《朝天子·咏喇叭》中<b>借咏喇叭讽刺宦官狐假虎威、为害军民</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    军听了军愁，民听了民怕。
+                                </div>
+                                <div class="explanation">
+                                    解释：军队听了军队发愁，百姓听了百姓害怕。揭露了宦官依仗权势欺压军民的罪恶行径。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">38</span></td>
+                            <td><span class="poem-title">《春望》</span></td>
+                            <td><span class="author">杜甫</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《春望》中表现<b>战乱导致家书珍贵</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    烽火连三月，家书抵万金。
+                                </div>
+                                <div class="explanation">
+                                    解释：战火已经连续三个月了，一封家信抵得上一万两黄金。表现了战乱时期人们对亲人音讯的渴望。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 3. 思乡怀人 -->
+        <div class="category-section category-homesick">
+            <h2>🏡 三、思乡怀人（思乡、思亲、怀友等）</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">39</span></td>
+                            <td><span class="poem-title">《次北固山下》</span></td>
+                            <td><span class="author">王湾</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《次北固山下》一诗中<b>游子思乡情深</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    乡书何处达？归雁洛阳边。
+                                </div>
+                                <div class="explanation">
+                                    解释：家信送到什么地方去呢？希望北归的大雁捎到洛阳去。借鸿雁传书表达思乡之情。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">40</span></td>
+                            <td><span class="poem-title">《峨眉山月歌》</span></td>
+                            <td><span class="author">李白</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《峨眉山月歌》一诗中，<b>点明远游路线，抒发依依惜别之情</b>的两句是：
+                                </div>
+                                <div class="answer">
+                                    夜发清溪向三峡，思君不见下渝州。
+                                </div>
+                                <div class="explanation">
+                                    解释：夜晚从清溪出发驶向三峡，想你却见不到你，怀着恋恋不舍的心情去渝州。表达了旅途中的思友之情。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">41</span></td>
+                            <td><span class="poem-title">《夜上受降城闻笛》</span></td>
+                            <td><span class="author">李益</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《夜上受降城闻笛》表现<b>征人满怀愁绪，凝望故乡，思念家乡</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    不知何处吹芦管，一夜征人尽望乡。
+                                </div>
+                                <div class="explanation">
+                                    解释：不知什么地方吹起了芦笛，一夜之间所有戍边的将士都遥望故乡。笛声引发了将士们强烈的思乡之情。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">42</span></td>
+                            <td><span class="poem-title">《春夜洛城闻笛》</span></td>
+                            <td><span class="author">李白</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    李白《春夜洛城闻笛》一诗中，<b>表达诗人对家乡的依恋和思乡之情</b>的两句是：
+                                </div>
+                                <div class="answer">
+                                    此夜曲中闻折柳，何人不起故园情。
+                                </div>
+                                <div class="explanation">
+                                    解释：今夜听到《折杨柳》的曲子，谁能不产生思念家乡的感情呢？"折柳"是送别曲，易引发思乡之情。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">43</span></td>
+                            <td><span class="poem-title">《逢入京使》</span></td>
+                            <td><span class="author">岑参</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《逢入京使》中<b>运用夸张手法传达惜别深情</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    故园东望路漫漫，双袖龙钟泪不干。
+                                </div>
+                                <div class="explanation">
+                                    解释：向东遥望故乡，路途遥远漫长，两袖被泪水沾湿了还没有干。用夸张手法表现了思乡之情的深切。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">44</span></td>
+                            <td><span class="poem-title">《黄鹤楼》</span></td>
+                            <td><span class="author">崔颢</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    崔颢在《黄鹤楼》一诗中<b>情景交融，抒发了游子悲苦的思乡之情</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    日暮乡关何处是，烟波江上使人愁。
+                                </div>
+                                <div class="explanation">
+                                    解释：暮色中何处是我故乡？江上烟波浩渺使人愁绪满怀。日暮时分最容易引发思乡之情。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">45</span></td>
+                            <td><span class="poem-title">《渡荆门送别》</span></td>
+                            <td><span class="author">李白</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    李白在《渡荆门送别》中，<b>借故乡之水的深情厚谊，表达对故乡思念之情</b>的语句是：
+                                </div>
+                                <div class="answer">
+                                    仍怜故乡水，万里送行舟。
+                                </div>
+                                <div class="explanation">
+                                    解释：依然怜爱故乡的水，不远万里送我行船。将故乡水拟人化，表达了诗人对故乡的眷恋之情。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">46</span></td>
+                            <td><span class="poem-title">《庭中有奇树》</span></td>
+                            <td><span class="author">无名氏</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《庭中有奇树》中<b>以花寄情，揭示了诗歌的主旨，表现对远行人的思念</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    攀条折其荣，将以遗所思。
+                                </div>
+                                <div class="explanation">
+                                    解释：攀折枝条摘下它的花朵，将要把它送给思念的人。通过折花赠人的细节表达思念之情。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">47</span></td>
+                            <td><span class="poem-title">《庭中有奇树》</span></td>
+                            <td><span class="author">无名氏</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《庭中有奇树》中<b>表达主人公无可奈何、自我宽慰，点明全诗主题</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    此物何足贵？但感别经时。
+                                </div>
+                                <div class="explanation">
+                                    解释：这花有什么珍贵的呢？只是感到离别已经很久了。表面说花不珍贵，实际强调思念之情深。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">48</span></td>
+                            <td><span class="poem-title">《月夜忆舍弟》</span></td>
+                            <td><span class="author">杜甫</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《月夜忆舍弟》诗中<b>浸润着作者主观感受的写景句</b>是：
+                                </div>
+                                <div class="answer">
+                                    露从今夜白，月是故乡明。
+                                </div>
+                                <div class="explanation">
+                                    解释：露水从今夜开始显得更白，月亮还是故乡的最明亮。明明是同一轮月亮，却感觉故乡的更明，这是思乡心理使然。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">49</span></td>
+                            <td><span class="poem-title">《左迁至蓝关示侄孙湘》</span></td>
+                            <td><span class="author">韩愈</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《从左迁至蓝关示侄孙湘》中<b>即景抒情（以景来寓前途坎坷难料）</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    云横秦岭家何在？雪拥蓝关马不前。
+                                </div>
+                                <div class="explanation">
+                                    解释：阴云横亘在秦岭，我的家在哪里？大雪堵塞了蓝田关，连马都不肯前行。借景抒情，表现前途渺茫、归家无望的悲凉。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">50</span></td>
+                            <td><span class="poem-title">《商山早行》</span></td>
+                            <td><span class="author">温庭筠</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《商山早行》中点明<b>"早行"的典型情景，引起旅行者感情共鸣</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    晨起动征铎，客行悲故乡。
+                                </div>
+                                <div class="explanation">
+                                    解释：清晨起床车马的铃铎已震动，游子悲叹故乡远在天涯。直接点明早行和思乡的主题。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">51</span></td>
+                            <td><span class="poem-title">《商山早行》</span></td>
+                            <td><span class="author">温庭筠</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    温庭筠《商山早行》中<b>由十个名词构成，蕴含六种景物（意象叠加），写出早行之景</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    鸡声茅店月，人迹板桥霜。
+                                </div>
+                                <div class="explanation">
+                                    解释：鸡叫声，茅草店，残月；人的足迹，木板桥，白霜。纯用名词组合，描绘了一幅凄清、寂寞的早行图。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">52</span></td>
+                            <td><span class="poem-title">《渔家傲》</span></td>
+                            <td><span class="author">范仲淹</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《渔家傲》<b>抒发征夫戍边难归的无奈和对家乡的眷恋之情</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    浊酒一杯家万里，燕然未勒归无计。
+                                </div>
+                                <div class="explanation">
+                                    解释：喝一杯浊酒想起远在万里之外的家乡，可是还没有像窦宪那样在燕然山刻石记功，无法回家。表现边塞将士思乡与责任之间的矛盾。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">53</span></td>
+                            <td><span class="poem-title">《十五从军征》</span></td>
+                            <td><span class="author">无名氏</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《十五从军征》中和贺知章的<b>"少小离家老大回"有异曲同工之妙</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    十五从军征，八十始得归。
+                                </div>
+                                <div class="explanation">
+                                    解释：十五岁就应征去参军，八十岁才能够返回家乡。通过巨大时间跨度表现战争的残酷和人生的不幸。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">54</span></td>
+                            <td><span class="poem-title">《天净沙·秋思》</span></td>
+                            <td><span class="author">马致远</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《天净沙·秋思》中<b>写游子孤寂愁苦之情的名句</b>是：
+                                </div>
+                                <div class="answer">
+                                    夕阳西下，断肠人在天涯。
+                                </div>
+                                <div class="explanation">
+                                    解释：夕阳向西落下，极度忧伤的旅人还漂泊在天涯。点明主题，直抒胸臆，表达游子漂泊之苦。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 4. 人生哲理 -->
+        <div class="category-section category-philosophy">
+            <h2>💡 四、人生哲理（哲理、志向、感悟等）</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">55</span></td>
+                            <td><span class="poem-title">《次北固山下》</span></td>
+                            <td><span class="author">王湾</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《次北固山下》一诗中，表现<b>时序变迁，新旧交替这一自然规律</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    海日生残夜，江春入旧年。
+                                </div>
+                                <div class="explanation">
+                                    解释：夜色将尽，海上旭日东升；新年未到，江上春意已现。蕴含新旧交替、时光流逝的哲理。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">56</span></td>
+                            <td><span class="poem-title">《登幽州台歌》</span></td>
+                            <td><span class="author">陈子昂</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    陈子昂《登幽州台歌》中<b>表达陈子昂生不逢时、怀才不遇</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    前不见古人，后不见来者。
+                                </div>
+                                <div class="explanation">
+                                    解释：往前不见古代礼贤下士的圣君，向后不见后世求才的明君。表现了诗人怀才不遇、孤独悲愤的心情。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">57</span></td>
+                            <td><span class="poem-title">《登幽州台歌》</span></td>
+                            <td><span class="author">陈子昂</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    陈子昂《登幽州台歌》中<b>抒发诗人独立于悠悠天地间，孤独寂寞之情</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    念天地之悠悠，独怆然而涕下。
+                                </div>
+                                <div class="explanation">
+                                    解释：想到天地悠悠无限，我独自悲伤地流下眼泪。在广阔时空背景下突出个人的渺小和孤独。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">58</span></td>
+                            <td><span class="poem-title">《望岳》</span></td>
+                            <td><span class="author">杜甫</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    杜甫在《望岳》中<b>表达不畏困难，敢于攀登绝顶，俯视一切的雄心壮志</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    会当凌绝顶，一览众山小。
+                                </div>
+                                <div class="explanation">
+                                    解释：一定要登上泰山顶峰，那时俯瞰群山都会显得渺小。表现了诗人不怕困难、敢于攀登的雄心。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">59</span></td>
+                            <td><span class="poem-title">《登飞来峰》</span></td>
+                            <td><span class="author">王安石</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    王安石《登飞来峰》中<b>富于哲理，借情抒景，表达自己锐意改革的远大政治抱负</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    不畏浮云遮望眼，自缘身在最高层。
+                                </div>
+                                <div class="explanation">
+                                    解释：不怕浮云遮住远望的视线，只因为自己站在塔的最高层。比喻掌握了正确观点方法，就能透过现象看到本质。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">60</span></td>
+                            <td><span class="poem-title">《游山西村》</span></td>
+                            <td><span class="author">陆游</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    陆游在《游山西村》一诗中<b>流传最广，景物描写中寓含哲理</b>，千百年来被人们广为传诵的两句是：
+                                </div>
+                                <div class="answer">
+                                    山重水复疑无路，柳暗花明又一村。
+                                </div>
+                                <div class="explanation">
+                                    解释：山峦重叠，水流曲折，正担心无路可走，忽然柳绿花艳间又出现一个山村。比喻困境中往往蕴含转机。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">61</span></td>
+                            <td><span class="poem-title">《过松源晨炊漆公店》</span></td>
+                            <td><span class="author">杨万里</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《过松源晨炊漆公店》中用<b>生动形象的比喻含蓄地说明了许多生活中看似容易的事，其实做起来并不容易的道理</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    正入万山圈子里，一山放过一山拦。
+                                </div>
+                                <div class="explanation">
+                                    解释：好比行走在万山环绕的圈子里，刚越过一座山，另一座山又拦在面前。比喻人生道路上的困难重重。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">62</span></td>
+                            <td><span class="poem-title">《野望》</span></td>
+                            <td><span class="author">王绩</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    王绩在《野望》中<b>引用典故，追古怀伤</b>，在萧瑟恬静的景色描写中表现诗人身处乱世，前途无望，孤独抑郁心情的句子是：
+                                </div>
+                                <div class="answer">
+                                    相顾无相识，长歌怀采薇。
+                                </div>
+                                <div class="explanation">
+                                    解释：环顾四周没有认识的人，只好长声歌唱《采薇》以抒发情怀。"采薇"指伯夷叔齐不食周粟的典故，表达避世隐居之意。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">63</span></td>
+                            <td><span class="poem-title">《龟虽寿》</span></td>
+                            <td><span class="author">曹操</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《龟虽寿》中作者<b>用比喻的方法，以神龟和腾蛇为喻，极言人的寿命有限，慨叹生命苦短</b>的诗句（运用比喻表明自然规律不以人的意志为转移）是：
+                                </div>
+                                <div class="answer">
+                                    神龟虽寿，犹有竟时。螣蛇乘雾，终为土灰。
+                                </div>
+                                <div class="explanation">
+                                    解释：神龟虽然长寿，但还有死亡的时候；螣蛇虽然能乘雾飞行，但终究会化为尘土。说明生死是自然规律。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">64</span></td>
+                            <td><span class="poem-title">《赠从弟》</span></td>
+                            <td><span class="author">刘桢</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《赠从弟》中<b>一问一答揭示松柏耐寒不凋、坚贞不变的本性</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    岂不罹凝寒？松柏有本性。
+                                </div>
+                                <div class="explanation">
+                                    解释：难道松柏没有遭受严寒吗？松柏自有它耐寒的本性。借松柏象征坚贞不屈的品格。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">65</span></td>
+                            <td><span class="poem-title">《饮酒》</span></td>
+                            <td><span class="author">陶渊明</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    陶渊明的《饮酒》中<b>表达了诗人不与世俗同流合污（本文的主旨句）</b>的诗句：
+                                </div>
+                                <div class="answer">
+                                    问君何能尔？心远地自偏。
+                                </div>
+                                <div class="explanation">
+                                    解释：问我为什么能够这样？只要心志高远，住处自然会显得偏僻安静。表达了超脱世俗、追求精神自由的人生态度。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">66</span></td>
+                            <td><span class="poem-title">《饮酒》</span></td>
+                            <td><span class="author">陶渊明</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    陶渊明的《饮酒》中<b>表明作者本想说明白，却又不可言传</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    此中有真意，欲辨已忘言。
+                                </div>
+                                <div class="explanation">
+                                    解释：这里面有人生的真义，想要分辨清楚，却忘了怎样用语言表达。说明有些人生感悟只可意会不可言传。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">67</span></td>
+                            <td><span class="poem-title">《浣溪沙》</span></td>
+                            <td><span class="author">晏殊</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    时光流逝，不能倒流，人们无力挽回，经常用晏殊的<b>表示慨叹</b>的两句诗是：
+                                </div>
+                                <div class="answer">
+                                    无可奈何花落去，似曾相识燕归来。
+                                </div>
+                                <div class="explanation">
+                                    解释：花儿凋谢了，想要它不凋谢也是无可奈何；燕子归来了，好像还是去年的那只。表达了对时光流逝的惆怅。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">68</span></td>
+                            <td><span class="poem-title">《望洞庭湖赠张丞相》</span></td>
+                            <td><span class="author">孟浩然</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《望洞庭湖赠张丞相》中<b>隐喻想做官而没有途径，希望有人引荐，积极出仕</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    坐观垂钓者，徒有羡鱼情。
+                                </div>
+                                <div class="explanation">
+                                    解释：坐着看别人垂钓，空有羡慕鱼儿上钩的心情。"临渊羡鱼不如退而结网"，这里委婉表达希望得到引荐。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">69</span></td>
+                            <td><span class="poem-title">《卜算子·黄州定慧院寓居作》</span></td>
+                            <td><span class="author">苏轼</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    "以<b>象征手法，匠心独运地通过鸿的孤独缥缈</b>，惊起回头、怀抱幽恨和选求宿处，表达了作者贬谪黄州时期的孤寂处境和高洁自许、不愿随波逐流的心境"的句子是：
+                                </div>
+                                <div class="answer">
+                                    拣尽寒枝不肯栖，寂寞沙洲冷。
+                                </div>
+                                <div class="explanation">
+                                    解释：挑遍了寒冷的树枝都不肯栖息，宁愿在寂寞清冷的沙洲上停留。以孤鸿自喻，表现孤高自许、不与世俗同流的心境。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">70</span></td>
+                            <td><span class="poem-title">《卜算子·咏梅》</span></td>
+                            <td><span class="author">陆游</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    陆游《卜算子·咏梅》中<b>写梅花即使遭遇摧折也坚持自己的操守和品行</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    零落成泥碾作尘，只有香如故。
+                                </div>
+                                <div class="explanation">
+                                    解释：即使凋零落地，被碾作尘土，依然和往常一样散发出缕缕清香。表现梅花坚贞不屈的品格。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">71</span></td>
+                            <td><span class="poem-title">《沁园春·雪》</span></td>
+                            <td><span class="author">毛泽东</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《沁园春·雪》中<b>由写景到论史起承上启下（过渡）作用</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    江山如此多娇，引无数英雄竞折腰。
+                                </div>
+                                <div class="explanation">
+                                    解释：祖国的河山如此美好，引得无数英雄争相为之倾倒。承上启下，从描写雪景过渡到评论历史人物。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">72</span></td>
+                            <td><span class="poem-title">《行路难》</span></td>
+                            <td><span class="author">李白</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《行路难》中<b>诗人引用两个典故，表示世路虽艰，但自己对前途并未丧失信心</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    闲来垂钓碧溪上，忽复乘舟梦日边。
+                                </div>
+                                <div class="explanation">
+                                    解释：闲暇时坐在溪边垂钓，忽然又梦见乘船经过太阳旁边。引用姜太公和伊尹的典故，表达对未来的信心。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">73</span></td>
+                            <td><span class="poem-title">《行路难》</span></td>
+                            <td><span class="author">李白</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《行路难》中<b>表明作者远大的政治抱负和强烈的自信心</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    长风破浪会有时，直挂云帆济沧海。
+                                </div>
+                                <div class="explanation">
+                                    解释：乘长风破万里浪的时机一定会到来，那时将高挂云帆直渡大海。表现诗人远大的政治抱负和坚定信念。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">74</span></td>
+                            <td><span class="poem-title">《酬乐天扬州初逢席上见赠》</span></td>
+                            <td><span class="author">刘禹锡</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    刘禹锡《酬乐天扬州初逢席上见赠》中<b>蕴含哲理，表明新事物必将取代旧事物</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    沉舟侧畔千帆过，病树前头万木春。
+                                </div>
+                                <div class="explanation">
+                                    解释：沉船旁边有千帆竞发，病树前头是万木争春。比喻腐朽的事物终将灭亡，新生事物蓬勃发展。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">75</span></td>
+                            <td><span class="poem-title">《水调歌头·明月几时有》</span></td>
+                            <td><span class="author">苏轼</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《水调歌头·明月几时有》中<b>词人以理遣情，希望从共赏明月中互致慰藉</b>，离别之憾在兄弟友爱中得到补偿的句子是：
+                                </div>
+                                <div class="answer">
+                                    但愿人长久，千里共婵娟。
+                                </div>
+                                <div class="explanation">
+                                    解释：只希望这世上所有人的亲人都能平安健康，即使相隔千里也能共享这美好的月光。表达对亲人的美好祝愿。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">76</span></td>
+                            <td><span class="poem-title">《丑奴儿·书博山道中壁》</span></td>
+                            <td><span class="author">辛弃疾</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《丑奴儿·书博山道中壁》中写<b>少年时代风华正茂而又无忧无虑</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    少年不识愁滋味，爱上层楼。
+                                </div>
+                                <div class="explanation">
+                                    解释：少年时不知道忧愁的滋味，喜欢登上高楼。写少年时代的天真烂漫、不识愁苦。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">77</span></td>
+                            <td><span class="poem-title">《丑奴儿·书博山道中壁》</span></td>
+                            <td><span class="author">辛弃疾</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《丑奴儿·书博山道中壁》中<b>用来表示那种多愁善感，每爱把自己想成很寂寞，很爱强说愁的无端愁闷情绪</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    为赋新词强说愁。
+                                </div>
+                                <div class="explanation">
+                                    解释：为了写出新词，没有愁而勉强说愁。讽刺少年时代无病呻吟、故作深沉的情态。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">78</span></td>
+                            <td><span class="poem-title">《丑奴儿·书博山道中壁》</span></td>
+                            <td><span class="author">辛弃疾</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    辛弃疾在《丑奴儿·书博山道中壁》中用<b>吞咽式的表情，表示有许多忧愁不能明说</b>，只能通过对天气的感知，来表达心中的悲凉与无奈之情的句子是：
+                                </div>
+                                <div class="answer">
+                                    欲说还休，却道天凉好个秋。
+                                </div>
+                                <div class="explanation">
+                                    解释：想要说又停下来不说，却说"天气凉爽，好一个秋天啊"。表现心中有无限愁苦却无法言说的复杂心情。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">79</span></td>
+                            <td><span class="poem-title">《定风波》</span></td>
+                            <td><span class="author">苏轼</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《定风波》中<b>饱含人生哲理，也是点睛之笔</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    回首向来萧瑟处，归去，也无风雨也无晴。
+                                </div>
+                                <div class="explanation">
+                                    解释：回头看看刚才风雨交加的地方，回去吧，既没有风雨也没有晴天。表达超然物外、宠辱不惊的人生态度。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">80</span></td>
+                            <td><span class="poem-title">《临江仙·夜登小阁，忆洛中旧游》</span></td>
+                            <td><span class="author">陈与义</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《临江仙·夜登小阁，忆洛中旧游》中<b>把国家兴亡和人生的感慨都托之于渔唱</b>，进一步表达词人内心寂寞悲凉的心情的句子是：
+                                </div>
+                                <div class="answer">
+                                    古今多少事，渔唱起三更。
+                                </div>
+                                <div class="explanation">
+                                    解释：古往今来多少兴亡之事，都化作半夜里渔夫的歌声。以渔歌的轻松反衬历史兴亡的沉重，表达深沉感慨。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">81</span></td>
+                            <td><span class="poem-title">《游山西村》</span></td>
+                            <td><span class="author">陆游</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《游山西村》中<b>表现农家热情好客的淳朴性格</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    莫笑农家腊酒浑，丰年留客足鸡豚。
+                                </div>
+                                <div class="explanation">
+                                    解释：不要笑话农家腊月酿的酒浑浊，丰收年景他们待客有充足的鸡和猪。表现了农家的热情好客。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">82</span></td>
+                            <td><span class="poem-title">《龟虽寿》</span></td>
+                            <td><span class="author">曹操</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《龟虽寿》中<b>表现诗人虽近暮年，仍然老当益壮，雄心不减</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    老骥伏枥，志在千里；烈士暮年，壮心不已。
+                                </div>
+                                <div class="explanation">
+                                    解释：年老的千里马虽然伏在马槽旁，雄心壮志仍在驰骋千里；有抱负的人即使到了晚年，奋发思进的雄心也不会停止。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">83</span></td>
+                            <td><span class="poem-title">《望洞庭湖赠张丞相》</span></td>
+                            <td><span class="author">孟浩然</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《望洞庭湖赠张丞相》<b>形象地描绘出洞庭湖壮阔气势</b>的句子：
+                                </div>
+                                <div class="answer">
+                                    气蒸云梦泽，波撼岳阳城。
+                                </div>
+                                <div class="explanation">
+                                    解释：水汽蒸腾笼罩了云梦大泽，波涛汹涌摇撼着岳阳城。用"蒸""撼"两个动词写出了洞庭湖的磅礴气势。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 5. 边塞战争 -->
+        <div class="category-section category-border">
+            <h2>⚔️ 五、边塞战争（戍边、战争、将士等）</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">84</span></td>
+                            <td><span class="poem-title">《夜上受降城闻笛》</span></td>
+                            <td><span class="author">李益</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《夜上受降城闻笛》中<b>表现边塞荒寒凄冷</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    回乐烽前沙似雪，受降城外月如霜。
+                                </div>
+                                <div class="explanation">
+                                    解释：回乐烽前的沙漠像白雪一样，受降城外的月色如寒霜一般。通过比喻渲染边塞的荒凉寒冷。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">85</span></td>
+                            <td><span class="poem-title">《木兰诗》</span></td>
+                            <td><span class="author">无名氏</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《凉州词》诗云："醉卧沙场君莫笑，古来征战几人回。"《木兰诗》中<b>有相似的两句诗</b>是：
+                                </div>
+                                <div class="answer">
+                                    将军百战死，壮士十年归。
+                                </div>
+                                <div class="explanation">
+                                    解释：将军身经百战有的牺牲了，壮士征战多年终于归来。概括了战争的残酷和将士们的英勇。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">86</span></td>
+                            <td><span class="poem-title">《木兰诗》</span></td>
+                            <td><span class="author">无名氏</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《木兰诗》中<b>运用对偶写边塞夜景和军营寒苦</b>：
+                                </div>
+                                <div class="answer">
+                                    朔气传金柝，寒光照铁衣。
+                                </div>
+                                <div class="explanation">
+                                    解释：北方的寒气传送着打更的声音，寒冷的月光照在战士们的铠甲上。对偶工整，表现边塞夜晚的寒冷艰苦。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">87</span></td>
+                            <td><span class="poem-title">《木兰诗》</span></td>
+                            <td><span class="author">无名氏</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《木兰诗》中<b>描写木兰万里迢迢，奔赴战场</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    万里赴戎机，关山度若飞。
+                                </div>
+                                <div class="explanation">
+                                    解释：不远万里奔赴战场，像飞一样跨过一道道关隘和山岭。夸张手法表现木兰行军的神速。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">88</span></td>
+                            <td><span class="poem-title">《使至塞上》</span></td>
+                            <td><span class="author">王维</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《使至塞上》中<b>采用对比手法，点明时间，表现诗人失意情绪和飘零之感</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    征蓬出汉塞，归雁入胡天。
+                                </div>
+                                <div class="explanation">
+                                    解释：像随风飘飞的蓬草一样出了汉地的边塞，像北飞的大雁一样进入胡人的天空。以"征蓬""归雁"自比，表现漂泊之感。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">89</span></td>
+                            <td><span class="poem-title">《渔家傲》</span></td>
+                            <td><span class="author">范仲淹</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    由名句"大漠孤烟直，长河落日圆"，可以使人联想到范仲淹《渔家傲》中<b>同是写边塞景象</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    长烟落日孤城闭。
+                                </div>
+                                <div class="explanation">
+                                    解释：烽烟直上，夕阳西下，孤城紧闭。描绘了边塞黄昏时分苍凉孤寂的景象。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">90</span></td>
+                            <td><span class="poem-title">《梁甫行》</span></td>
+                            <td><span class="author">曹植</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《梁甫行》中<b>通过狐狸、兔子的侧面描写，反衬出边海人们生活环境的荒蛮以及边海人们的恐惧与凄楚</b>的句子：
+                                </div>
+                                <div class="answer">
+                                    柴门何萧条，狐兔翔我宇。
+                                </div>
+                                <div class="explanation">
+                                    解释：柴门多么萧条冷落，狐狸兔子在房屋周围自由出没。通过动物活动的描写反衬边海地区的荒凉。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">91</span></td>
+                            <td><span class="poem-title">《雁门太守行》</span></td>
+                            <td><span class="author">李贺</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《雁门太守行》中<b>写战云笼罩，使人透不过气来，而战士整装待发，士气还很旺盛</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    黑云压城城欲摧，甲光向日金鳞开。
+                                </div>
+                                <div class="explanation">
+                                    解释：敌军如黑云压城，城墙像要被摧毁，铠甲在阳光下像金色的鱼鳞一样闪闪发光。前句写敌军声势，后句写我军士气。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">92</span></td>
+                            <td><span class="poem-title">《雁门太守行》</span></td>
+                            <td><span class="author">李贺</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    "半卷红旗临易水，霜重鼓寒声不起。"显然是潜师夜袭，一场苦战。"易水"二字使人联想起战国时刺客荆轲的《易水歌》：
+                                </div>
+                                <div class="answer">
+                                    风萧萧兮易水寒，壮士一去兮不复还。
+                                </div>
+                                <div class="explanation">
+                                    解释：风萧萧地吹啊易水寒冷，壮士一去啊不再回还。引用荆轲刺秦典故，表现将士们视死如归的英雄气概。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">93</span></td>
+                            <td><span class="poem-title">《赤壁》</span></td>
+                            <td><span class="author">杜牧</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《赤壁》中<b>表现杜牧一反传统的看法，抒发奇想，引发读者的联想和想象</b>的两句诗是：
+                                </div>
+                                <div class="answer">
+                                    东风不与周郎便，铜雀春深锁二乔。
+                                </div>
+                                <div class="explanation">
+                                    解释：假如东风不给周瑜方便，那么大乔小乔就会被关进铜雀台了。从反面落笔，提出与历史事实相反的假设。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">94</span></td>
+                            <td><span class="poem-title">《白雪歌送武判官归京》</span></td>
+                            <td><span class="author">岑参</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《白雪歌送武判官归京》中<b>描写白雪与红旗辉映，象征着戍边将士不畏艰难的英勇气概</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    纷纷暮雪下辕门，风掣红旗冻不翻。
+                                </div>
+                                <div class="explanation">
+                                    解释：黄昏时大雪纷飞落在军营门前，红旗被冻住，狂风也吹不动它。红白相映，色彩鲜明，表现边塞将士的坚韧。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">95</span></td>
+                            <td><span class="poem-title">《白雪歌送武判官归京》</span></td>
+                            <td><span class="author">岑参</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《白雪歌送武判官归京》中<b>以春花比喻冬雪，想象奇特</b>的名句是：
+                                </div>
+                                <div class="answer">
+                                    忽如一夜春风来，千树万树梨花开。
+                                </div>
+                                <div class="explanation">
+                                    解释：好像一夜之间春风吹来，千万棵树上梨花盛开。以梨花喻雪，新颖奇特，成为咏雪名句。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 6. 友情送别 -->
+        <div class="category-section category-friendship">
+            <h2>🤝 六、友情送别（送别、友情、思念等）</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">96</span></td>
+                            <td><span class="poem-title">《闻王昌龄左迁龙标遥有此寄》</span></td>
+                            <td><span class="author">李白</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    李白在《闻王昌龄左迁龙标遥有此寄》中，<b>把明月人格化，表达对友人不幸遭贬的深切同情与关怀</b>的名句是：
+                                </div>
+                                <div class="answer">
+                                    我寄愁心与明月，随君直到夜郎西。
+                                </div>
+                                <div class="explanation">
+                                    解释：我把为你忧愁的心托付给明月，让它伴随你一直到夜郎的西边。将明月拟人化，表达对友人的深情关怀。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">97</span></td>
+                            <td><span class="poem-title">《闻王昌龄左迁龙标遥有此寄》</span></td>
+                            <td><span class="author">李白</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    诗中<b>借景抒情蕴含飘零之感、离别之恨、迁谪之远</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    杨花落尽子规啼，闻道龙标过五溪。
+                                </div>
+                                <div class="explanation">
+                                    解释：杨花落尽，子规啼叫，听说你被贬到龙标要经过五溪。以"杨花""子规"等意象渲染离别的伤感氛围。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">98</span></td>
+                            <td><span class="poem-title">《江南逢李龟年》</span></td>
+                            <td><span class="author">杜甫</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    杜甫《江南逢李龟年》一诗中，<b>追忆往昔与李龟年的接触，言过去之盛，为下文做铺垫</b>的两句是：
+                                </div>
+                                <div class="answer">
+                                    岐王宅里寻常见，崔九堂前几度闻。
+                                </div>
+                                <div class="explanation">
+                                    解释：当年在岐王府里经常见到你，在崔九的厅堂前多次听到你的歌声。回忆过去交往，表现当时的繁华。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">99</span></td>
+                            <td><span class="poem-title">《江南逢李龟年》</span></td>
+                            <td><span class="author">杜甫</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    杜甫《江南逢李龟年》一诗中，<b>表达出"同是天涯沦落人"的感慨</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    正是江南好风景，落花时节又逢君。
+                                </div>
+                                <div class="explanation">
+                                    解释：正是江南风景美好的时候，在落花时节又和你相逢。"落花时节"一语双关，既指自然季节，也指人生暮年。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">100</span></td>
+                            <td><span class="poem-title">《送杜少府之任蜀州》</span></td>
+                            <td><span class="author">王勃</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《送杜少府之任蜀州》中<b>表达作者送别友人时旷达胸怀和真挚友情</b>的诗句：
+                                </div>
+                                <div class="answer">
+                                    海内存知己，天涯若比邻。
+                                </div>
+                                <div class="explanation">
+                                    解释：四海之内有知心朋友，即使远在天边也像近邻一样。表现了真挚的友谊可以超越空间距离的哲理。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">101</span></td>
+                            <td><span class="poem-title">《送杜少府之任蜀州》</span></td>
+                            <td><span class="author">王勃</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    王勃的《送杜少府之任蜀州》<b>在叙将别之时，气势宏伟，已寓不必伤别之意，为下文抒情奠定基调</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    城阙辅三秦，风烟望五津。
+                                </div>
+                                <div class="explanation">
+                                    解释：长安城由三秦之地护卫着，透过风云烟雾遥望五个渡口。以壮阔的景象开篇，奠定豪迈的基调。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">102</span></td>
+                            <td><span class="poem-title">《送杜少府之任蜀州》</span></td>
+                            <td><span class="author">王勃</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    王勃《送杜少府之任蜀州》中<b>劝慰友人不要哀伤，表达出诗人豁达，爽朗的胸怀</b>的诗句：
+                                </div>
+                                <div class="answer">
+                                    与君离别意，同是宦游人。
+                                </div>
+                                <div class="explanation">
+                                    解释：我和你离别的心情是一样的，因为我们都是在外做官的人。以同为宦游人的身份宽慰友人。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">103</span></td>
+                            <td><span class="poem-title">《送杜少府之任蜀州》</span></td>
+                            <td><span class="author">王勃</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    王勃《送杜少府之任蜀州》中<b>表明不要因为离别而伤感</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    无为在歧路，儿女共沾巾。
+                                </div>
+                                <div class="explanation">
+                                    解释：不要在分手的岔路口，像小儿女一样让泪水沾湿手巾。劝慰友人不要像一般儿女那样悲伤。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">104</span></td>
+                            <td><span class="poem-title">《送友人》</span></td>
+                            <td><span class="author">李白</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《送友人》中<b>借比喻的修辞手法来表达诗人与友人难舍难分之情</b>的诗句：
+                                </div>
+                                <div class="answer">
+                                    浮云游子意，落日故人情。
+                                </div>
+                                <div class="explanation">
+                                    解释：飘浮的白云就像游子的心意，缓缓下落的夕阳就像故人的深情。以"浮云""落日"为喻，表达依依惜别之情。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">105</span></td>
+                            <td><span class="poem-title">《酬乐天扬州初逢席上见赠》</span></td>
+                            <td><span class="author">刘禹锡</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《酬乐天扬州初逢席上见赠》中<b>用典故表达回归之后的感受</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    怀旧空吟闻笛赋，到乡翻似烂柯人。
+                                </div>
+                                <div class="explanation">
+                                    解释：怀念故友只能空吟《思旧赋》，回到故乡反而像传说中的烂柯人。引用向秀闻笛和烂柯人的典故，表达世事变迁、物是人非之感。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">106</span></td>
+                            <td><span class="poem-title">《白雪歌送武判官归京》</span></td>
+                            <td><span class="author">岑参</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《白雪歌送武判官归京》中<b>与"孤帆远影碧空尽，唯见长江天际流"有异曲同工之妙</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    山回路转不见君，雪上空留马行处。
+                                </div>
+                                <div class="explanation">
+                                    解释：山路回环曲折已看不见你的身影，雪地上只留下马蹄的印迹。通过景物描写，表现目送友人远去的不舍之情。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">107</span></td>
+                            <td><span class="poem-title">《江城子·密州出猎》</span></td>
+                            <td><span class="author">苏轼</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《江城子·密州出猎》中<b>借用典故表达自己希望得到朝廷重用</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    持节云中，何日遣冯唐？
+                                </div>
+                                <div class="explanation">
+                                    解释：什么时候能像冯唐持节云中那样，受到朝廷的重用？引用冯唐持节赦魏尚的典故，表达希望重新被重用的愿望。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 7. 爱情闺怨 -->
+        <div class="category-section category-love">
+            <h2>💕 七、爱情闺怨（爱情、相思、闺怨等）</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="60">序号</th>
+                            <th width="180">篇目</th>
+                            <th width="120">作者</th>
+                            <th>名句 / 考点内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="num">108</span></td>
+                            <td><span class="poem-title">《无题》</span></td>
+                            <td><span class="author">李商隐</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《无题》中<b>表达诗人思念朋友，渴望团聚</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    何当共剪西窗烛，却话巴山夜雨时。
+                                </div>
+                                <div class="explanation">
+                                    解释：什么时候才能和你一起在西窗下剪烛长谈，再回头说起巴山夜雨的情景。想象未来相聚的情景，表达对重逢的渴望。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">109</span></td>
+                            <td><span class="poem-title">《关雎》</span></td>
+                            <td><span class="author">无名氏</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《关雎》<b>生动形象地表现出男子对姑娘思念之深追求不到而痛苦难眠</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    辗转反侧，寤寐思服。
+                                </div>
+                                <div class="explanation">
+                                    解释：翻来覆去睡不着觉，白天黑夜都在思念她。通过动作描写表现男子深深的思念之情。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">110</span></td>
+                            <td><span class="poem-title">《蒹葭》</span></td>
+                            <td><span class="author">无名氏</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    成语<b>"秋水伊人"</b>源自《蒹葭》中的诗句：
+                                </div>
+                                <div class="answer">
+                                    所谓伊人，在水一方。
+                                </div>
+                                <div class="explanation">
+                                    解释：所说的那个人，在水的另一边。写所爱之人可望而不可即，后来成为思念心上人的代名词。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">111</span></td>
+                            <td><span class="poem-title">《式微》</span></td>
+                            <td><span class="author">无名氏</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《式微》中<b>借女子之口道出诗人遭受统治者的压迫，夜以继日地在野外干活，有家不能回，苦不堪言的怨言</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    微君之故，胡为乎中露？微君之躬，胡为乎泥中？
+                                </div>
+                                <div class="explanation">
+                                    解释：要不是为了君主的事情，为何要在露水中？要不是为了君主自身，为何要在泥浆中？通过反问表达劳役之苦和怨愤之情。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">112</span></td>
+                            <td><span class="poem-title">《无题》</span></td>
+                            <td><span class="author">李商隐</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    李商隐《无题》中<b>寓情于景，以春光易逝，人力对此无可奈何，渲染离情，极写伤别沉痛心情和缠绵的相思之苦</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    相见时难别亦难，东风无力百花残。
+                                </div>
+                                <div class="explanation">
+                                    解释：相见不容易，离别也难舍难分，春风无力，百花凋零。以暮春景象渲染离别时的伤感氛围。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">113</span></td>
+                            <td><span class="poem-title">《无题》</span></td>
+                            <td><span class="author">李商隐</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《无题》中<b>运用双关谐音、比喻的修辞写对爱情忠贞</b>，（常用来比喻教师的工作，被人们用来赞美无私奉献的精神）的诗句是：
+                                </div>
+                                <div class="answer">
+                                    春蚕到死丝方尽，蜡炬成灰泪始干。
+                                </div>
+                                <div class="explanation">
+                                    解释：春蚕到死才停止吐丝，蜡烛燃尽才停止流泪。"丝"谐音"思"，比喻对爱情的坚贞不渝。现在也用来赞美奉献精神。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">114</span></td>
+                            <td><span class="poem-title">《渔家傲》</span></td>
+                            <td><span class="author">李清照</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《渔家傲》中<b>表达了词人决心像大鹏一样乘风高飞，乐观地寻求幸福的理想与愿望</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    九万里风鹏正举。风休住，蓬舟吹取三山去。
+                                </div>
+                                <div class="explanation">
+                                    解释：大鹏正乘着九万里长风高飞。风啊不要停，把我这一叶轻舟吹到蓬莱仙山去。以大鹏自喻，表达追求自由和理想的豪情。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">115</span></td>
+                            <td><span class="poem-title">《咸阳城东楼》</span></td>
+                            <td><span class="author">许浑</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《咸阳城东楼》中<b>暗写唐朝政治腐败，已处于风雨飘摇中</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    溪云初起日沉阁，山雨欲来风满楼。
+                                </div>
+                                <div class="explanation">
+                                    解释：溪云初起，太阳沉落在阁楼后面，山雨将要到来，大风已灌满城楼。以自然景象暗示社会动荡和政治危机。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">116</span></td>
+                            <td><span class="poem-title">《咸阳城东楼》</span></td>
+                            <td><span class="author">许浑</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    许浑的《咸阳城东楼》中<b>感慨历史沧桑</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    鸟下绿芜秦苑夕，蝉鸣黄叶汉宫秋。
+                                </div>
+                                <div class="explanation">
+                                    解释：鸟儿飞落在秦苑的绿草上时已是黄昏，秋蝉在汉宫的黄叶间鸣叫。通过秦苑汉宫的荒凉景象，抒发历史兴亡之感。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">117</span></td>
+                            <td><span class="poem-title">《天净沙·秋思》</span></td>
+                            <td><span class="author">马致远</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《天净沙·秋思》中<b>渲染萧条、冷落、凄凉气氛的写景</b>的句子是：
+                                </div>
+                                <div class="answer">
+                                    枯藤老树昏鸦，古道西风瘦马。
+                                </div>
+                                <div class="explanation">
+                                    解释：枯藤缠绕着老树，树上栖息着黄昏归巢的乌鸦，古道上秋风萧瑟，一匹瘦马踽踽独行。九种意象叠加，营造出萧瑟凄凉的气氛。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">118</span></td>
+                            <td><span class="poem-title">《游山西村》</span></td>
+                            <td><span class="author">陆游</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《游山西村》中<b>写村民们在迎接神的箫鼓中来来往往祈求丰收</b>的诗句是：
+                                </div>
+                                <div class="answer">
+                                    箫鼓追随春社近，衣冠简朴古风存。
+                                </div>
+                                <div class="explanation">
+                                    解释：吹箫打鼓的声音此起彼伏，因为春社日将近，村民们衣着简朴，古风犹存。描绘了乡村祭祀活动的热闹场面。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">119</span></td>
+                            <td><span class="poem-title">《朝天子·咏喇叭》</span></td>
+                            <td><span class="author">王磐</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《朝天子·咏喇叭》中<b>运用夸张手法，对封建社会做了"灰飞烟灭，必然灭亡"的预测</b>的是：
+                                </div>
+                                <div class="answer">
+                                    眼见的吹翻了这家，吹伤了那家，只吹的水尽鹅飞罢！
+                                </div>
+                                <div class="explanation">
+                                    解释：眼看着吹垮了这家，又吹伤了那家，直吹得水干鹅飞才算完。用夸张手法揭露宦官对百姓的残酷剥削，预示封建统治必然灭亡。
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="num">120</span></td>
+                            <td><span class="poem-title">《题破山寺后禅院》</span></td>
+                            <td><span class="author">常建</span></td>
+                            <td class="content-cell">
+                                <div class="question">
+                                    《题破山寺后禅院》中<b>悠长的钟磬声，在万籁俱寂中带来深远的禅意，使人心灵愈发沉静</b>的句子：
+                                </div>
+                                <div class="answer">
+                                    万籁此都寂，但余钟磬音。
+                                </div>
+                                <div class="explanation">
+                                    解释：此时自然界的一切声音都寂静了，只听到寺院里悠扬的钟磬声。以动衬静，表现了禅院的幽深寂静。
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>必记必背-古诗词曲名句分类图表 | 共7个主题分类，120条核心名句</p>
+            <p>📊 系统分类 · 带注释解释 · 便于理解记忆 · 适合中考高考复习备考</p>
+            <p>✨ 分类统计：自然景物(22条) | 家国情怀(16条) | 思乡怀人(15条) | 人生哲理(26条) | 边塞战争(11条) | 友情送别(11条) | 爱情闺怨(6条)</p>
+        </div>
+    </div>
+</body>
+</html>
