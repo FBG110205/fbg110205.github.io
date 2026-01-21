@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语文 - 樾樾的初升高备考文档库</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Microsoft YaHei', sans-serif; }
+        body { background-color: #fdf6f6; color: #333; line-height: 1.6; padding: 20px; max-width: 1000px; margin: 0 auto; }
+        
+        /* 导航按钮 */
+        .nav-buttons { margin-bottom: 30px; display: flex; gap: 15px; flex-wrap: wrap; }
+        .nav-btn { 
+            display: inline-block; 
+            padding: 12px 25px; 
+            background-color: #e74c3c; /* 与首页语文按钮颜色一致 */
+            color: white; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .nav-btn:hover { background-color: #c0392b; }
+        .nav-btn.home { background-color: #3498db; }
+        .nav-btn.home:hover { background-color: #2980b9; }
+        
+        /* 页面标题 */
+        .page-header { text-align: center; margin: 30px 0; }
+        .page-header h1 { color: #c0392b; font-size: 2.5em; margin-bottom: 10px; }
+        .subject-icon { font-size: 3em; margin-bottom: 15px; }
+        
+        /* 文档列表 */
+        .content-area { background-color: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .doc-section { margin-bottom: 35px; }
+        .doc-section h2 { color: #2c3e50; border-left: 5px solid #e74c3c; padding-left: 15px; margin-bottom: 20px; }
+        .doc-list { list-style: none; }
+        .doc-item { 
+            padding: 15px; 
+            margin-bottom: 10px; 
+            background-color: #f9f9f9; 
+            border-left: 4px solid #e74c3c; 
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .doc-item:hover { background-color: #f1f1f1; }
+        .doc-link { 
+            color: #2980b9; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 18px;
+            flex-grow: 1;
+        }
+        .doc-link:hover { text-decoration: underline; }
+        .doc-format { 
+            background-color: #eee; 
+            padding: 3px 10px; 
+            border-radius: 12px; 
+            font-size: 12px; 
+            color: #555;
+            margin-left: 15px;
+        }
+        .doc-desc { color: #666; font-size: 14px; width: 100%; margin-top: 8px; }
+        
+        /* 提示区域 */
+        .note { 
+            background-color: #fffde7; 
+            border-left: 5px solid #ffd54f; 
+            padding: 20px; 
+            margin-top: 40px; 
+            border-radius: 8px;
+        }
+        .note h3 { color: #f57c00; margin-bottom: 10px; }
+        
+        footer { margin-top: 40px; text-align: center; color: #95a5a6; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <!-- 导航按钮区域 -->
+    <div class="nav-buttons">
+        <a href="../index.html" class="nav-btn home">🏠 返回首页</a>
+        <!-- 当前为一级学科页面，无需“返回上一级”，此处预留 -->
+        <!-- <a href="#" class="nav-btn">⬅️ 返回上一级</a> -->
+    </div>
+    
+    <div class="page-header">
+        <div class="subject-icon">📚</div>
+        <h1>语文备考资料</h1>
+        <p>这里是语文科目的所有学习文档和资料链接。</p>
+    </div>
+    
+    <div class="content-area">
+        <!-- 文档分类区域 -->
+        <section class="doc-section">
+            <h2>📖 古诗文鉴赏</h2>
+            <ul class="doc-list">
+                <!-- 示例文档链接1 -->
+                <li class="doc-item">
+                    <a href="../docs/chinese/poetry_analysis_01.html" class="doc-link" target="_blank">初中必背古诗文50篇详解</a>
+                    <span class="doc-format">HTML</span>
+                    <p class="doc-desc">包含注释、译文和赏析。</p>
+                </li>
+                <li class="doc-item">
+                    <a href="../docs/chinese/classical_chinese_notes.pdf" class="doc-link" target="_blank">文言文常见实词虚词手册</a>
+                    <span class="doc-format">PDF</span>
+                    <p class="doc-desc">PDF版本，方便打印背诵。</p>
+                </li>
+            </ul>
+        </section>
+        
+        <section class="doc-section">
+            <h2>✍️ 现代文阅读与写作</h2>
+            <ul class="doc-list">
+                <li class="doc-item">
+                    <a href="../docs/chinese/reading_templates.docx" class="doc-link" target="_blank">阅读理解答题模板</a>
+                    <span class="doc-format">DOCX</span>
+                </li>
+                <li class="doc-item">
+                    <a href="../docs/chinese/essay_examples.html" class="doc-link" target="_blank">优秀作文范例集锦</a>
+                    <span class="doc-format">HTML</span>
+                </li>
+            </ul>
+        </section>
+        
+        <!-- 预留空白区域，用于未来添加内容 -->
+        <section class="doc-section">
+            <h2>📚 其他资料</h2>
+            <ul class="doc-list">
+                <li class="doc-item">
+                    <p style="color: #888; font-style: italic;">（此处预留用于添加新文档链接）</p>
+                </li>
+            </ul>
+        </section>
+        
+        <!-- 操作提示区域 -->
+        <div class="note">
+            <h3>💡 如何添加新的文档？</h3>
+            <p>1. 将您的文档（如HTML、PDF、Word文件）上传到 <code>docs/chinese/</code> 文件夹。<br>
+               2. 回到此页面，编辑此HTML文件。<br>
+               3. 在对应的 <code>&lt;ul class="doc-list"&gt;</code> 下方，按照已有格式添加新的 <code>&lt;li class="doc-item"&gt;</code> 条目。<br>
+               4. 修改 <code>href</code> 中的链接地址指向您上传的文件。</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2023 樾樾的初升高备考文档库 - 语文科目 | 最后更新：<span id="update-date"></span></p>
+    </footer>
+    
+    <script>
+        // 更新页脚日期
+        document.getElementById('update-date').textContent = new Date().toLocaleDateString('zh-CN');
+    </script>
+</body>
+</html>
