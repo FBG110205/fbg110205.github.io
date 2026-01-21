@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>化学 - 樾樾的初升高备考文档库</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Microsoft YaHei', sans-serif; }
+        body { background-color: #fef9e7; color: #333; line-height: 1.6; padding: 20px; max-width: 1000px; margin: 0 auto; }
+        .nav-buttons { margin-bottom: 30px; display: flex; gap: 15px; flex-wrap: wrap; }
+        .nav-btn { 
+            display: inline-block; 
+            padding: 12px 25px; 
+            background-color: #f39c12; /* 化学主题色 */
+            color: white; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .nav-btn:hover { background-color: #e67e22; }
+        .nav-btn.home { background-color: #3498db; }
+        .nav-btn.home:hover { background-color: #2980b9; }
+        .page-header { text-align: center; margin: 30px 0; }
+        .page-header h1 { color: #e67e22; font-size: 2.5em; margin-bottom: 10px; }
+        .subject-icon { font-size: 3em; margin-bottom: 15px; }
+        .content-area { background-color: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .doc-section { margin-bottom: 35px; }
+        .doc-section h2 { color: #2c3e50; border-left: 5px solid #f39c12; padding-left: 15px; margin-bottom: 20px; }
+        .doc-list { list-style: none; }
+        .doc-item { 
+            padding: 15px; 
+            margin-bottom: 10px; 
+            background-color: #f9f9f9; 
+            border-left: 4px solid #f39c12; 
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .doc-item:hover { background-color: #f1f1f1; }
+        .doc-link { 
+            color: #2980b9; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 18px;
+            flex-grow: 1;
+        }
+        .doc-link:hover { text-decoration: underline; }
+        .doc-format { 
+            background-color: #eee; 
+            padding: 3px 10px; 
+            border-radius: 12px; 
+            font-size: 12px; 
+            color: #555;
+            margin-left: 15px;
+        }
+        .doc-desc { color: #666; font-size: 14px; width: 100%; margin-top: 8px; }
+        .note { 
+            background-color: #fdebd0; 
+            border-left: 5px solid #f39c12; 
+            padding: 20px; 
+            margin-top: 40px; 
+            border-radius: 8px;
+        }
+        .note h3 { color: #e67e22; margin-bottom: 10px; }
+        footer { margin-top: 40px; text-align: center; color: #95a5a6; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="nav-buttons">
+        <a href="../index.html" class="nav-btn home">🏠 返回首页</a>
+    </div>
+    <div class="page-header">
+        <div class="subject-icon">🧪</div>
+        <h1>化学备考资料</h1>
+        <p>这里是化学科目的所有学习文档和资料链接。</p>
+    </div>
+    <div class="content-area">
+        <section class="doc-section">
+            <h2>⚗️ 基础知识</h2>
+            <ul class="doc-list">
+                <li class="doc-item">
+                    <a href="../docs/chemistry/element_periodic_table.html" class="doc-link" target="_blank">元素周期表（交互式）</a>
+                    <span class="doc-format">HTML</span>
+                </li>
+                <li class="doc-item">
+                    <a href="../docs/chemistry/common_formulas.docx" class="doc-link" target="_blank">化学方程式汇编</a>
+                    <span class="doc-format">DOCX</span>
+                </li>
+            </ul>
+        </section>
+        <section class="doc-section">
+            <h2>🔍 实验专题</h2>
+            <ul class="doc-list">
+                <li class="doc-item">
+                    <a href="../docs/chemistry/lab_procedures.pdf" class="doc-link" target="_blank">必考实验操作与现象</a>
+                    <span class="doc-format">PDF</span>
+                </li>
+                <li class="doc-item">
+                    <a href="../docs/chemistry/experiment_photos/" class="doc-link" target="_blank">实验装置图集</a>
+                    <span class="doc-format">JPG</span>
+                </li>
+            </ul>
+        </section>
+        <section class="doc-section">
+            <h2>📈 其他资料</h2>
+            <ul class="doc-list">
+                <li class="doc-item">
+                    <p style="color: #888; font-style: italic;">（此处预留用于添加新文档链接）</p>
+                </li>
+            </ul>
+        </section>
+        <div class="note">
+            <h3>💡 如何添加新的文档？</h3>
+            <p>1. 将文档上传到 <code>docs/chemistry/</code> 文件夹。<br>
+               2. 编辑此HTML文件。<br>
+               3. 在对应的列表中添加新的链接条目。</p>
+        </div>
+    </div>
+    <footer>
+        <p>© 2023 樾樾的初升高备考文档库 - 化学科目 | 最后更新：<span id="update-date"></span></p>
+    </footer>
+    <script>
+        document.getElementById('update-date').textContent = new Date().toLocaleDateString('zh-CN');
+    </script>
+</body>
+</html>
