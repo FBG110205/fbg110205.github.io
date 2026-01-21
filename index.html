@@ -19,7 +19,7 @@
             flex-direction: column;
         }
         
-        /* 顶部LOGO区域 */
+        /* 顶部LOGO区域 - 这里就是LOGO显示的关键部分 */
         header { 
             text-align: center; 
             margin-bottom: 40px;
@@ -30,8 +30,9 @@
             height: 20vh; /* 页面高度的五分之一 */
             min-height: 120px;
             max-height: 200px;
+            /* ==== 图片路径在这里！==== */
             background-color: #f8f9fa; /* 备用背景色 */
-            background-image: url('assets/images/LOGO.png'); /* 已改为大写LOGO.png */
+            background-image: url('assets/images/logo.png'); /* 图片路径 */
             background-size: contain; /* 完整显示图片 */
             background-repeat: no-repeat;
             background-position: center center;
@@ -128,6 +129,7 @@
 <body>
     <header>
         <div id="logo">
+            <!-- 如果图片加载失败，显示这个 -->
             <div class="logo-placeholder" id="logo-placeholder">
                 正在加载LOGO...
             </div>
@@ -169,14 +171,14 @@
                 if (logoPlaceholder) {
                     logoPlaceholder.style.display = 'none';
                 }
-                logoDiv.style.backgroundImage = "url('assets/images/LOGO.png')"; /* 已改为大写 */
+                logoDiv.style.backgroundImage = "url('assets/images/logo.png')";
                 logoDiv.style.border = 'none';
             };
             
             logoImg.onerror = function() {
                 console.log('❌ LOGO图片加载失败');
                 if (logoPlaceholder) {
-                    logoPlaceholder.innerHTML = 'LOGO图片未找到<br>请检查assets/images/LOGO.png路径';
+                    logoPlaceholder.innerHTML = 'LOGO图片未找到<br>请将logo.png上传到assets/images/文件夹';
                     logoPlaceholder.style.color = '#e74c3c';
                     logoPlaceholder.style.fontSize = '14px';
                 }
@@ -184,8 +186,8 @@
                 logoDiv.style.borderColor = '#e74c3c';
             };
             
-            // 测试图片路径 - 已改为大写LOGO.png
-            logoImg.src = 'assets/images/LOGO.png';
+            // 测试图片路径
+            logoImg.src = 'assets/images/logo.png';
         });
     </script>
 </body>
