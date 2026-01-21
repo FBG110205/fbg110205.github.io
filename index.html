@@ -7,29 +7,61 @@
     <style>
         /* 基础样式 */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Microsoft YaHei', sans-serif; }
-        body { background-color: #f5f7fa; color: #333; line-height: 1.6; padding: 20px; max-width: 1200px; margin: 0 auto; }
+        body { 
+            background-color: #f5f7fa; 
+            color: #333; 
+            line-height: 1.6; 
+            padding: 20px; 
+            max-width: 1200px; 
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
         
-        /* 顶部LOGO区域 */
-        header { text-align: center; margin-bottom: 40px; }
+        /* 顶部LOGO区域 - 这里就是LOGO显示的关键部分 */
+        header { 
+            text-align: center; 
+            margin-bottom: 40px;
+            flex-shrink: 0;
+        }
         #logo { 
             width: 100%; 
-            height: 20vh; /* 约为页面高度的五分之一 */
-            background-color: #4a6fa5; /* 临时蓝色背景，稍后替换为您的图片 */
-            background-image: url('assets/images/logo.png'); /* 稍后替换路径 */
-            background-size: cover;
-            background-position: center;
+            height: 20vh; /* 页面高度的五分之一 */
+            min-height: 120px;
+            max-height: 200px;
+            /* ==== 图片路径在这里！==== */
+            background-color: #f8f9fa; /* 备用背景色 */
+            background-image: url('assets/images/logo.png'); /* 图片路径 */
+            background-size: contain; /* 完整显示图片 */
+            background-repeat: no-repeat;
+            background-position: center center;
             border-radius: 10px;
             margin-bottom: 20px;
+            border: 2px dashed #ddd;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 24px;
+            overflow: hidden;
         }
-        h1 { color: #2c3e50; margin-top: 10px; }
+        .logo-placeholder {
+            color: #999;
+            font-size: 16px;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 { 
+            color: #2c3e50; 
+            margin-top: 10px; 
+            font-size: 2.2em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
 
         /* 学科导航按钮区域 */
-        main { text-align: center; }
+        main { 
+            text-align: center; 
+            flex-grow: 1;
+        }
         .subject-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
@@ -49,12 +81,17 @@
             transition: all 0.3s ease;
             text-decoration: none;
             display: block;
+            position: relative;
+            overflow: hidden;
         }
         .subject-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         }
-        /* 为不同学科设置不同颜色 */
+        .subject-btn:active {
+            transform: translateY(-2px);
+        }
+        /* 学科按钮颜色 */
         #chinese { background: linear-gradient(135deg, #e74c3c, #c0392b); }
         #math { background: linear-gradient(135deg, #3498db, #2980b9); }
         #english { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
@@ -71,6 +108,7 @@
             font-size: 14px; 
             padding-top: 20px;
             border-top: 1px solid #eee;
+            flex-shrink: 0;
         }
 
         /* 响应式设计 */
@@ -78,18 +116,23 @@
             .subject-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
             .subject-btn { padding: 25px 15px; font-size: 18px; }
             h1 { font-size: 24px; }
+            #logo { height: 15vh; min-height: 100px; }
         }
         @media (max-width: 480px) {
             .subject-grid { grid-template-columns: 1fr; }
             body { padding: 15px; }
+            h1 { font-size: 20px; }
+            #logo { height: 12vh; min-height: 80px; }
         }
     </style>
 </head>
 <body>
     <header>
         <div id="logo">
-            <!-- LOGO图片将在这里显示 -->
-            当前是LOGO区域
+            <!-- 如果图片加载失败，显示这个 -->
+            <div class="logo-placeholder" id="logo-placeholder">
+                正在加载LOGO...
+            </div>
         </div>
         <h1>樾樾的初升高备考文档库</h1>
     </header>
@@ -97,7 +140,6 @@
     <main>
         <p style="font-size: 18px; color: #555; margin-bottom: 20px;">请选择学科查看备考资料：</p>
         <div class="subject-grid">
-            <!-- 7个学科按钮，链接到对应的HTML页面 -->
             <a href="subjects/chinese.html" class="subject-btn" id="chinese">语 文</a>
             <a href="subjects/math.html" class="subject-btn" id="math">数 学</a>
             <a href="subjects/english.html" class="subject-btn" id="english">英 语</a>
@@ -110,24 +152,41 @@
 
     <footer>
         <p>© 2023 樾樾的初升高备考文档库 | 基于 GitHub Pages 构建 | 最后更新日期：<span id="current-date"></span></p>
+        <p style="font-size: 12px; margin-top: 5px;">网站地址：<span id="site-url"></span></p>
     </footer>
 
     <script>
-        // 更新页脚日期
+        // 更新页脚日期和网站地址
         document.getElementById('current-date').textContent = new Date().toLocaleDateString('zh-CN');
+        document.getElementById('site-url').textContent = window.location.href;
         
-        // 简单检查LOGO图片是否加载失败
+        // 检查LOGO图片是否加载成功
         window.addEventListener('load', function() {
             var logoDiv = document.getElementById('logo');
+            var logoPlaceholder = document.getElementById('logo-placeholder');
             var logoImg = new Image();
+            
             logoImg.onload = function() {
-                console.log('LOGO图片加载成功');
+                console.log('✅ LOGO图片加载成功');
+                if (logoPlaceholder) {
+                    logoPlaceholder.style.display = 'none';
+                }
+                logoDiv.style.backgroundImage = "url('assets/images/logo.png')";
+                logoDiv.style.border = 'none';
             };
+            
             logoImg.onerror = function() {
-                logoDiv.innerHTML = 'LOGO图片未上传，请将logo.png放入assets/images/文件夹';
-                logoDiv.style.color = '#e74c3c';
-                logoDiv.style.fontSize = '18px';
+                console.log('❌ LOGO图片加载失败');
+                if (logoPlaceholder) {
+                    logoPlaceholder.innerHTML = 'LOGO图片未找到<br>请将logo.png上传到assets/images/文件夹';
+                    logoPlaceholder.style.color = '#e74c3c';
+                    logoPlaceholder.style.fontSize = '14px';
+                }
+                logoDiv.style.backgroundColor = '#fff5f5';
+                logoDiv.style.borderColor = '#e74c3c';
             };
+            
+            // 测试图片路径
             logoImg.src = 'assets/images/logo.png';
         });
     </script>
